@@ -8,3 +8,9 @@ pow = \ x n -> powIter x n 1
 
 fooSum :: (Num a, Num b, Num c) => a -> b -> c
 fooSum x y = -1
+
+myLen :: [a] -> Int
+myLen xs = iterLen xs 0
+  where
+    iterLen [] accum = accum
+    iterLen (x:xs) accum = iterLen xs (1+accum)
