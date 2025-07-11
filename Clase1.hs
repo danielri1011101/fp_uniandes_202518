@@ -1,5 +1,3 @@
-import Control.Monad.Accum (MonadAccum(accum))
-import System.Win32 (COORD(xPos))
 pow :: Num a => a -> Int -> a
 pow = \ x n -> powIter x n 1
   where
