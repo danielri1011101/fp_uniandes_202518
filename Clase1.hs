@@ -56,4 +56,12 @@ describeList' xs =
                [x] -> "Singleton list."
                _ -> "Longer list."
 
--- compareLists :: [a] -> [a] -> String
+compareLists :: [a] -> [a] -> String
+compareLists xs ys =
+    let (a,b) = (length xs, length ys)
+    in talk (a-b)
+      where
+        talk n
+          | n > 0 = "Left list is bigger!"
+          | n == 0 = "Same length!"
+          | n < 0 = "Right list is bigger!"
