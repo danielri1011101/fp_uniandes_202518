@@ -32,3 +32,13 @@ pullElem' n xs
         iterElem' 0 _ accum = accum
         iterElem' n [] _ = Nothing
         iterElem' n (x:xs) _ = iterElem' (n-1) xs (Just x)
+
+myReverse :: [a] -> [a]
+myReverse xs = iterReverse xs []
+  where
+    iterReverse [] accum = accum
+    iterReverse (x:xs) accum = iterReverse xs (x:accum)
+
+myConcat :: [a] -> [a] -> [a]
+myConcat [] ys = ys
+myConcat (x:xs) ys = x : (myConcat xs ys)
