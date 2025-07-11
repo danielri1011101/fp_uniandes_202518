@@ -42,3 +42,18 @@ myReverse xs = iterReverse xs []
 myConcat :: [a] -> [a] -> [a]
 myConcat [] ys = ys
 myConcat (x:xs) ys = x : (myConcat xs ys)
+
+-- With pattern matching
+describeList :: [a] -> String
+describeList [] = "Empty list."
+describeList [x] = "Singleton list."
+describeList _ = "Longer list."
+
+-- With case expressions.
+describeList' :: [a] -> String
+describeList' xs =
+    case xs of [] -> "Empty list."
+               [x] -> "Singleton list."
+               _ -> "Longer list."
+
+-- compareLists :: [a] -> [a] -> String
