@@ -1,0 +1,1 @@
+main = printStrLn "Hello, World!"
