@@ -32,3 +32,7 @@ applyTwice' :: (a -> a) -> (a -> a)
 applyTwice' = \ f -> f . f
 
 -- compare (-8) :: (Num a, Ord a) => a -> Ordering
+
+-- rewriting of composition. Using a different symbol.
+myCompose :: (b -> c) -> (a -> b) -> a -> c
+myCompose = \ f -> \ g -> \ x -> f (g x)
