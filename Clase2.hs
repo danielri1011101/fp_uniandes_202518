@@ -36,3 +36,13 @@ applyTwice' = \ f -> f . f
 -- rewriting of composition. Using a different symbol.
 myCompose :: (b -> c) -> (a -> b) -> a -> c
 myCompose = \ f -> \ g -> \ x -> f (g x)
+
+fib :: Integer -> Integer
+fib n
+  | n < 0 = -1
+  | n == 0 = 1
+  | n == 1 = 1
+  | otherwise = fibIter n 1 1
+      where
+        fibIter 1 small big = big
+        fibIter n small big = fibIter (n-1) big (small + big)
