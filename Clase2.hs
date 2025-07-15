@@ -1,3 +1,4 @@
+import Distribution.Compat.Lens (_1)
 min' :: Ord a => a -> a -> a
 min' = \ x y -> if x < y then x else y
 
@@ -37,6 +38,7 @@ applyTwice' = \ f -> f . f
 myCompose :: (b -> c) -> (a -> b) -> a -> c
 myCompose = \ f -> \ g -> \ x -> f (g x)
 
+-- Good Fibonacci
 fib :: Integer -> Integer
 fib n
   | n < 0 = -1
@@ -46,3 +48,37 @@ fib n
       where
         fibIter 1 small big = big
         fibIter n small big = fibIter (n-1) big (small + big)
+
+badFib :: Integer -> Integer
+badFib n
+  | n < 0 = -1
+  | n == 0 = 1
+  | n == 1 = 1
+  | otherwise = badFib (n-1) + badFib (n-2)
+
+
+null' :: [a] -> Bool
+null' [] = True
+null' _ = False
+
+-- Pattern matchiing on lists
+lsExample :: Num a => a
+lsExample = let (x : (y : _)) = [3,5,7] ++ [11,13,17] in y
+
+fiveIn3dPos :: (Num a, Eq a) => [a] -> Bool
+fiveIn3dPos (_:(_:(5:_))) = True
+fiveIn3dPos _ = False
+
+boomOrBang x = if x < 10 then "BOOM!" else "BANG!"
+
+boomBangs xs = [boomOrBang x | x <- xs, odd x]
+
+removeNonUpperCase cs = [c | c <- cs , c `elem` ['A'..'Z']]
+
+
+-- Our implementation of take
+take' :: Int -> [a] -> [a]
+take' _ [] = []
+take' n _
+  | n <= 0 = []
+take' n (x:xs) = x : take' (n-1) xs
