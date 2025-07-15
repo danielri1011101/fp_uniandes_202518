@@ -13,6 +13,7 @@ mod' = \ a m -> a - a `div` m
 
 -- Making a non-standard instance of Num.
 instance Num a => Num (b -> a) where
+    (+) :: Num a => (b -> a) -> (b -> a) -> b -> a
     f + g = \ x -> f x + g x
     f * g = \ x -> f x * g x
     f - g = \ x -> f x - g x
@@ -96,7 +97,8 @@ printList (x:xs) = do
 --  printList fibs
 
 main = do
-  let nrs = [5 * n | n <- [1..19]]
-  putStrLn "This is smart Fibonacci:"
-  let fibs = map fib nrs
-  printList fibs
+  let nrs = [5 * n | n <- [1..6]]
+  putStrLn "This is good Fibonacci:"
+  printList $ map fib nrs
+  putStrLn "This is naive Fibonacci:"
+  printList $ map badFib nrs
