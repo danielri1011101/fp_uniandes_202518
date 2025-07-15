@@ -1,4 +1,3 @@
-import Distribution.Compat.Lens (_1)
 min' :: Ord a => a -> a -> a
 min' = \ x y -> if x < y then x else y
 
@@ -49,6 +48,7 @@ fib n
         fibIter 1 small big = big
         fibIter n small big = fibIter (n-1) big (small + big)
 
+-- Bad Fibonacci, textually recursive.
 badFib :: Integer -> Integer
 badFib n
   | n < 0 = -1
@@ -82,3 +82,21 @@ take' _ [] = []
 take' n _
   | n <= 0 = []
 take' n (x:xs) = x : take' (n-1) xs
+
+printList :: Show a => [a] -> IO ()
+printList [] = return ()
+printList (x:xs) = do
+  putStrLn (show x)
+  printList xs
+
+-- A COMPLICATED WAY TO BIND FIBS
+--main = do
+--  let nrs = [5 * n | n <- [1..5]]
+--  fibs <- return $ map fib nrs
+--  printList fibs
+
+main = do
+  let nrs = [5 * n | n <- [1..19]]
+  putStrLn "This is smart Fibonacci:"
+  let fibs = map fib nrs
+  printList fibs
