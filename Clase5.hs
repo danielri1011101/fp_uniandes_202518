@@ -22,3 +22,44 @@ instance Functor ZipList1 where
 instance Aplicative1 ZipList1 where
     pure1 = ZipList1 . repeat
     zl_fs <**> zl_xs = ZipList1 $ zipWith ($) (getIt zl_fs) (getIt zl_xs)
+
+-- Now using the standard Applicative to instantiate Wolf's Logged data
+-- type.
+
+data Logged a = L a String
+
+instance Functor Logged where
+    fmap f (L x msg) = L (f x) msg
+
+instance Applicative Logged where
+    pure = flip L ""
+    -- Point free for pure x = L x ""
+    (L f mf) <*> (L x mx) = L (f x) (mf ++ "\n" ++ mx)
+
+--
+-- Exercises
+--
+
+data Via = Kr | Cl deriving Eq
+
+-- Colombian address: tipo-de-vía, primer número, primer sufijo,
+-- segundo número, segundo sufijo, número de metros desde inicio de
+-- cuadra, detalles.
+data CAddress = CAddress {
+                          via :: Via, pNr :: Int, pSf :: String,
+                          sNr :: Int, sSf :: String, mts :: Int,
+                          ds :: String
+                         }
+
+instance Show CAddress where
+    show x
+      | via x == Kr = "Carrera " ++ showTail
+      | via x == Cl = "Calle " ++ showTail
+      where
+        showTail = nCra ++ " - " ++ (show $ mts x) ++ " " ++ ds x
+        nCra = show (pNr x) ++ pSf x ++ " # " ++  show (sNr x) ++ sSf x
+
+home = CAddress {
+                 via = Kr, pNr = 2, pSf = "", sNr = 16, sSf = "A", mts = 38,
+                 ds = "Torre 7 Apartamento 405"
+                }
