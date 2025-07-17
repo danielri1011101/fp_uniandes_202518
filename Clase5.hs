@@ -63,3 +63,14 @@ home = CAddress {
                  via = Kr, pNr = 2, pSf = "", sNr = 16, sSf = "A", mts = 38,
                  ds = "Torre 7 Apartamento 405"
                 }
+
+ac1 = putStrLn "Hello"
+ac2 = putStrLn "World"
+ac3 = do {_ <- ac1; ac2}
+
+combine :: IO a -> IO b -> IO b
+combine ax ay  = do
+    ax
+    ay
+
+-- _do_ is syntactic sugar for successive binding.
