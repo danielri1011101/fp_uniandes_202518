@@ -74,3 +74,12 @@ combine ax ay  = do
     ay
 
 -- _do_ is syntactic sugar for successive binding.
+
+-- What should be the type of _main_?
+main = do
+    putStrLn "Hola!"
+    return 3
+    return ()
+
+when1 :: Bool -> IO () -> IO ()
+when1 = \ b ac -> if b then ac else return ()
